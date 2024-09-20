@@ -1,0 +1,23 @@
+name = "moveto-api"
+compatibility_date = "2024-09-20"
+compatibility_flags = [ "nodejs_compat" ]
+
+# [vars]
+# MY_VAR = "my-variable"
+
+# [[kv_namespaces]]
+# binding = "MY_KV_NAMESPACE"
+# id = "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
+
+# [[r2_buckets]]
+# binding = "MY_BUCKET"
+# bucket_name = "my-bucket"
+
+ [[d1_databases]]
+ binding = "DB"
+ database_name = "moveto-db"
+ database_id = "d810b9cb-3f7e-47b2-8ead-06dae542bb3b"
+ migrations_dir = "drizzle/migrations"
+
+# [ai]
+# binding = "AI"
