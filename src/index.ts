@@ -1,36 +1,26 @@
-import { Hono } from 'hono';
-import { eq } from 'drizzle-orm';
-import { drizzle } from 'drizzle-orm/d1';
+import { Hono } from 'hono'
+import { csrf } from 'hono/csrf'
+import { cors } from 'hono/cors'
+import auth from './auth/route'
 
-import { posts } from './db/schema';
+const sites = ['http://localhost:3000', 'https://www.moveto.kr', 'https://moveto.kr']
 
-export type Env = {
-  DB: D1Database;
-};
+const app = new Hono()
 
-const app = new Hono<{ Bindings: Env }>();
+app.use(
+  csrf({
+    origin: sites,
+  })
+)
+app.use(
+  cors({
+    origin: sites,
+  })
+)
+app.get('/', c => {
+  return c.json({ message: 'Moveto API' })
+})
 
-app
-    .get('/posts', async (c) => {
-      const db = drizzle(c.env.DB);
-      const result = await db.select().from(posts).all();
-      return c.json(result);
-    })
-    .get('/posts/:id', async (c) => {
-      const db = drizzle(c.env.DB);
-      const id = Number(c.req.param('id'));
-      const result = await db.select().from(posts).where(eq(posts.id, id));
-      return c.json(result);
-    })
-    .post('/posts', async (c) => {
-      const db = drizzle(c.env.DB);
-      const { title, content } = await c.req.json();
-      const result = await db
-          .insert(posts)
-          .values({ title, content })
-          .returning();
-      return c.json(result);
-    });
+app.route('/auth', auth)
 
-
-export default app;
+export default app
