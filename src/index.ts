@@ -17,6 +17,7 @@ app.use(
     origin: sites,
   })
 )
+
 app.get('/', c => {
   return c.json({ message: 'Moveto API' })
 })
