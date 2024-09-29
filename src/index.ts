@@ -2,6 +2,7 @@ import { Hono } from 'hono'
 import { csrf } from 'hono/csrf'
 import { cors } from 'hono/cors'
 import auth from './auth/route'
+import s3Route from './s3/route'
 
 const sites = ['http://localhost:3000', 'https://www.moveto.kr', 'https://moveto.kr']
 
@@ -23,5 +24,6 @@ app.get('/', c => {
 })
 
 app.route('/auth', auth)
+app.route('/s3', s3Route)
 
 export default app

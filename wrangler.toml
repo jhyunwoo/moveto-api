@@ -9,9 +9,10 @@ compatibility_flags = [ "nodejs_compat" ]
 # binding = "MY_KV_NAMESPACE"
 # id = "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
 
-# [[r2_buckets]]
-# binding = "MY_BUCKET"
-# bucket_name = "my-bucket"
+ [[r2_buckets]]
+ binding = "BUCKET"
+ bucket_name = "moveto-v2"
+ preview_bucket_name="moveto-dev"
 
  [[d1_databases]]
  binding = "DB"
