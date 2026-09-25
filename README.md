@@ -39,6 +39,16 @@ bun run dev
 
 ### Production
 
+## Project context and engineering approach
+
+This repository is a Moveto API implementation for file-sharing workflows. It handles the server-side concerns behind uploads and shared links: validation, authentication, metadata, database migration, and signed object-storage access.
+
+Hono and Zod define a typed HTTP boundary. Drizzle with SQLite/D1 manages the relational model, Lucia supplies authentication, and the AWS S3 client plus presigned URLs keep file transfer out of the API process. The documented local D1 workflow makes schema changes reproducible before deployment to Cloudflare Workers.
+
+## Status
+
+Earlier API implementation retained as a technical reference for the Moveto product line.
+
 1. Apply migrations to D1 database on Cloudflare
 
 ```
